@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+    <link href="stylesheet.css" type="text/css" rel="stylesheet">
+
+    <link href="comments_stylesheet.css" type="text/css" rel="stylesheet">
+    <title>Image Board</title>
+</head>
+<body>
+
+
+    <div class="arrows">
+            <div class="leftArrow">
+
+            </div>
+            <div></div>
+            <div class="rightArrow">  </div>
+    </div>
+
+    <div class="hidingArrows">
+            <div class="leftHidingArrow">
+            </div>
+            <div></div>
+            <div class="rightHidingArrow">  </div>
+    </div>
+
+    <div id="commentsOverlay">
+
+        <div id="picArea">
+
+            <div id="x_button">
+                X
+            </div>
+
+            <div class="selectedImage">
+
+                <img src= "https://s3.amazonaws.com/spicyturkeyangie/XQCR_bYt1MumwIOFWF9DFfsBaMpRnvnH.jpg">
+
+                <div class="imageDescription">
+                    <h3>{{title}}</h3>
+                    <p>{{description}}</p>
+                    <p class="timestamp"> <em >uploaded on {{created_at}}</em></p>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="commentsArea">
+            <div class="newComment">
+                <!-- <h3> this is the add new comment section!</h3> -->
+                <form method="POST" class="commentsFormDiv">
+                    <input id="newCommentForm" name="comment" placeholder="add your comment here" style="width:80%; height:50px;">
+                <div>
+                    <input id="username" name="username" placeholder="username">
+                    <input type="submit" value="Submit!!!" v-on:click="submitComment">
+                </div>
+                </form>
+            </div>
+
+            <div class="existingComments">
+                <!-- <h3> this is the display comments section!</h3> -->
+                <div class="comment">
+                    <p> Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 </p>
+                    <div class="commentInfo">
+                     {{username}} on {{created_at}}
+                    </div>
+                </div>
+                <div class="comment">
+                    <p> Comment 2 Comment 2Comment 2 </p>
+                    <div class="commentInfo">
+                     Username on date
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </style>
+    <div id="header"> <h1> Welcome to imageboard! </h1> </div>
+    <div id="main">
+
+        <some-component> </some-component>
+
+        <div class="formDiv">
+            <input name="image" value="myTitle" placeholder="Title" v-model="fileToUpload.title">
+            <input name="description" value="myDesc" placeholder="Description" v-model="fileToUpload.desc">
+            <input name="username" value="myUsrnm" placeholder="Username" v-model="fileToUpload.username">
+            <input type="file" value="" name="image" v-on:change="getFile">
+            <input type="submit" value="Upload" v-on:click="upload">
+        </div>
+        <image-modal
+            c-if="currentImageId"
+            v-bind:imageId="currentImageId"
+            v-on:close="serCurrentImageToNull">
+
+        </image-modal>
+
+        <some-component-tmpl> </some-component-tmpl>
+        <div class="imageBoard">
+            <div v-for="image in images">
+                <div class="imageDiv">
+                    <img class="resultImages" v-bind:src="image.url">
+                </div>
+                <div class="resultText">
+                    <a v-bind:href="image.url" class="imageTitle"> {{image.title}}</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script id="some-component-tmpl" type="text/x-template">
+        <div>
+            <h1>heading....: {{heading}}</h1>
+            <h2> lala: {{lala}}</h2>
+            <p>This is a component</p>
+            <some-other-component></some-other-component>
+        </div>
+    </script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>
