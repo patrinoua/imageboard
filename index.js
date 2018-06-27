@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 app.use(express.static('./public'));
 
-app.listen(8080, ()=>{
+app.listen(process.env.PORT || 8080, ()=>{
     console.log("I'm listening...");
 })
 
@@ -41,7 +41,6 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req,res){
         const imageUrl = config.s3Url+req.file.filename;
         db.addIngToDatabase(req.body.title, req.body.desc, req.body.username, imageUrl)
         .then((result)=>{
-            console.log("added to db: ", result.rows[0]);
             res.json({
                 images:result.rows[0],
                 success:true
@@ -56,20 +55,14 @@ app.post('/upload', uploader.single('file'), s3.upload, function(req,res){
 })
 
 app.post('/comment', function(req,res){
-    console.log('submitting comment... server side');
-    console.log('req.body',req.body);
     db.postComment(req.body.comment,req.body.username,req.body.image_id)
     .then(comment=>{
         console.log('added a new comment :',comment.rows);
         db.getComments(req.body.image_id).then(allComments=>{
-            // console.log('now getting the list of all the comments:',allComments.rows);
             res.json({
                 comments:allComments.rows
             })
         })
-        // res.json({
-        //     comment:comment.rows[0]
-        // })
     })
     .catch(err=>{
         console.log('err while posting the comment:',err);
@@ -77,11 +70,7 @@ app.post('/comment', function(req,res){
 })
 
 app.get('/comments',function(req,res){
-    console.log('get comments... ^_^ ');
-    console.log("req.body:",req.body);
-    // console.log("*** req.body.image_id:",req.body.image_id);
     db.getComments(req.body.image_id).then(result=>{
-        // console.log("comment result (index.js):", result.rows);
         res.json({
             comments:result.rows
         })
