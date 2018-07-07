@@ -7,12 +7,8 @@
     <title>Image Board</title>
 </head>
 <body>
-
-
     <div class="arrows">
-            <div class="leftArrow">
-
-            </div>
+            <div class="leftArrow">   </div>
             <div></div>
             <div class="rightArrow">  </div>
     </div>
@@ -40,17 +36,11 @@
                     <h3>{{title}}</h3>
                     <p>{{description}}</p>
                     <p class="timestamp"> <em >uploaded on {{created_at}}</em></p>
-
                 </div>
             </div>
-
         </div>
-
-
-
         <div class="commentsArea">
             <div class="newComment">
-                <!-- <h3> this is the add new comment section!</h3> -->
                 <form method="POST" class="commentsFormDiv">
                     <input id="newCommentForm" name="comment" placeholder="add your comment here" style="width:80%; height:50px;">
                 <div>
@@ -59,9 +49,7 @@
                 </div>
                 </form>
             </div>
-
             <div class="existingComments">
-                <!-- <h3> this is the display comments section!</h3> -->
                 <div class="comment">
                     <p> Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 Comment 1 </p>
                     <div class="commentInfo">
@@ -81,9 +69,7 @@
     </style>
     <div id="header"> <h1> Welcome to imageboard! </h1> </div>
     <div id="main">
-
         <some-component> </some-component>
-
         <div class="formDiv">
             <input name="image" value="myTitle" placeholder="Title" v-model="fileToUpload.title">
             <input name="description" value="myDesc" placeholder="Description" v-model="fileToUpload.desc">
@@ -95,9 +81,7 @@
             c-if="currentImageId"
             v-bind:imageId="currentImageId"
             v-on:close="serCurrentImageToNull">
-
         </image-modal>
-
         <some-component-tmpl> </some-component-tmpl>
         <div class="imageBoard">
             <div v-for="image in images">
@@ -109,7 +93,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <script id="some-component-tmpl" type="text/x-template">

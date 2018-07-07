@@ -94,10 +94,8 @@ app.get('/moreImages', function(req,res){
 })
 
 app.get('/click/',function(req,res){
-    // console.log("click on.. req.query.id", req.query);
     db.clickedOn(req.query.id)
     .then(clickedOn=>{
-
         db.getComments(req.query.id)
         .then(comments=>{
             var selectedImage={
@@ -111,13 +109,8 @@ app.get('/click/',function(req,res){
             res.json({
                 selectedImage, existingComments:comments.rows
             })
-
         })
         .catch(err=>console.log('err on getting comments:',err))
-
-
     })
     .catch(err=>console.log('err on clicked on:',err))
-
-    // console.log(req);
 })

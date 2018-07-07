@@ -27,10 +27,9 @@ exports.upload=function(req,res,next){
     console.log("s3Response.statusCode: ",s3Response.statusCode);
     if(wasSuccessful){
         next();
-        fs.unlink(req.file.path, x=>x) //new stuff... remove from your local space, leave only on amazon. (does it work??)
+        fs.unlink(req.file.path, x=>x) 
     }else{
         res.sendStatus(500);
     }
-
 });
 }

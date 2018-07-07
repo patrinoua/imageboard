@@ -7,30 +7,21 @@
     <title>Image Board</title>
 </head>
 <body>
-
-    </style>
-
     <div id="main">
-
         <image-modal
         v-if="currentImageId"
         v-bind:id="currentImageId"
         v-on:close="closeFunction"
         ></image-modal>
-
         <div id="header">  <h1> Imageboard </h1> </div>
-
         <div class="formDiv">
             <input type="file" value="" name="image" v-on:change="getFile">
-            <input name="image" value="myTitle" placeholder="Title" v-model="fileToUpload.title">
-            <input name="description" value="myDesc" placeholder="Description" v-model="fileToUpload.desc">
-            <input name="username" value="myUsrnm" placeholder="Username" v-model="fileToUpload.username">
-
+            <input name="image" value="myTitle" placeholder="*Title" v-model="fileToUpload.title">
+            <input name="description" value="myDesc" placeholder="*Description" v-model="fileToUpload.desc">
+            <input name="username" value="myUsrnm" placeholder="*Username" v-model="fileToUpload.username">
             <input type="submit" value="Upload" v-on:click="upload">
         </div>
-
         <div class="imageBoard">
-
             <div v-for="image in images">
                 <div class="imageDiv">
                     <a v-bind:href='"#"+image.id' class="imageDiv">
@@ -39,40 +30,28 @@
                         v-bind:src="image.url">
                     </a>
                 </div>
-                <!-- <div class="resultText">
-                        <a v-bind:href="image.url" v-bind:id="image.id" class="imageTitle">
-                            ({{image.id}}) {{image.title}}
-                       </a>
-                 </div> -->
             </div>
         </div>
         <button id="moreButton" class="button"
         v-on:click="moreButton()"
         > MORE </button>
     </div>
-
-
     <script id="image-modal" type="text/x-template">
         <div id="commentsOverlay">
             <div id="picArea" v-on:click="close">
                 <div id="x_button"
                 v-on:click="close"> X </div>
-
                 <div class="selectedImage">
                     <img v-bind:src= "url">
                     <div class="imageDescription">
                         <h3>{{title}}</h3>
                         <p>{{description}}</p>
                         <p class="timestamp"> <em >uploaded on {{created_at}}</em></p>
-
                     </div>
                 </div>
             </div>
-
-
             <div class="commentsArea">
                 <div class="newComment">
-                    <!-- <h3> this is the add new comment section!</h3> -->
                     <div class="commentsFormDiv">
                         <input id="newCommentForm" name="comment" v-model:comment="comment" placeholder="add your comment here" style="width:80%; height:50px;">
                     <div>
@@ -82,7 +61,6 @@
                 </div>
                 </div>
                 <div class="existingComments">
-
                     <div v-for="comment in comments">
                         <div class="comment">
                             <p>  {{comment.comment}} </p>
@@ -91,14 +69,10 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
-
     </script>
-
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/script.js"></script>
