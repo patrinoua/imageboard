@@ -28,6 +28,9 @@ exports.getComments=(image_id)=>{
 exports.clickedOn=(id)=>{
     return db.query(`SELECT * FROM images WHERE id=$1`,[id])
 }
+exports.getPrevious=(id)=>{
+    return db.query(`SELECT * FROM images WHERE id = (select max(id) from images where id < $1)`,[id])
+}
 exports.postComment=(comment, username, image_id)=>{
     return db.query(`INSERT into comments (comment, username, image_id)
                      VALUES ($1,$2,$3)

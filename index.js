@@ -114,3 +114,25 @@ app.get('/click/',function(req,res){
     })
     .catch(err=>console.log('err on clicked on:',err))
 })
+
+app.get('/previous/',function(req,res){
+    db.getPrevious(req.query.id)
+    .then(previous=>{
+        db.getComments(req.query.id)
+        .then(comments=>{
+            var selectedImage={
+                id: previous.rows[0].id,
+                title: previous.rows[0].title,
+                url: previous.rows[0].url,
+                username: previous.rows[0].username,
+                description: previous.rows[0].description,
+                created_at: previous.rows[0].created_at
+            }
+            res.json({
+                selectedImage, existingComments:comments.rows
+            })
+        })
+        .catch(err=>console.log('err on getting comments:',err))
+    })
+    .catch(err=>console.log('err on clicked on:',err))
+})

@@ -32,15 +32,24 @@
                 </div>
             </div>
         </div>
-        <button id="moreButton" class="button"
-        v-on:click="moreButton()"
+        <button id="moreButton"
+                class="button"
+                v-on:click="moreButton()"
         > MORE </button>
     </div>
     <script id="image-modal" type="text/x-template">
         <div id="commentsOverlay">
-            <div id="picArea" v-on:click="close">
-                <div id="x_button"
-                v-on:click="close"> X </div>
+            <div id="x_button"
+            v-on:click="close"> X </div>
+
+            <div id="picArea">
+                <div class="arrowBox"
+                    v-on:click="leftArrowFunction()"
+                >
+                    <div class="leftArrow"/>
+                    <div class="leftHidingArrow"/>
+                </div>
+
                 <div class="selectedImage">
                     <img v-bind:src= "url">
                     <div class="imageDescription">
@@ -48,6 +57,11 @@
                         <p>{{description}}</p>
                         <p class="timestamp"> <em >uploaded on {{created_at}}</em></p>
                     </div>
+                </div>
+
+                <div class="arrowBox">
+                    <div class="rightHidingArrow"/>
+                    <div class="rightArrow"/>
                 </div>
             </div>
             <div class="commentsArea">

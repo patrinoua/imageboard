@@ -34,6 +34,14 @@
             getImageById: function(id){
                 axios.get('/click/?id='+this.id)
             },
+            leftArrowFunction: function(id){
+                console.log('you clicked on the left arrow',this.id);
+                axios.get('/previous/?id='+this.id)
+                .then(result=>{
+                    console.log('lala',result.data.selectedImage);
+                    this.$emit("id")
+                })
+            },
             close: function(){
                 this.$emit("close");
             }
