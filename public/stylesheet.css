@@ -86,8 +86,8 @@ a{
     font-size: 0.9em;
     width: 98%;
     height: 70px;
-    position: absolute;
-    bottom:0;
+    /* position: absolute; */
+    /* bottom:0; */
     display: flex;
     justify-content: center;
     align-items: center;
